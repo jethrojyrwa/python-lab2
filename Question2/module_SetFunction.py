@@ -1,6 +1,6 @@
 def addSetElement(s,x):
     if x in s:
-        print(x," already exists in the set")
+        print("Cannot add ",x," as it already exists in the set")
         return s
     else:
         s.add(x)
@@ -56,14 +56,96 @@ def lenSet(s):
     count=0
     for elem in s:
         count += 1
-
-    print("Length of the set ",s,"=",count)
+    return count
 
 def symDifSet(s1,s2):
     return s1 ^ s2
 
 def powerSet(s):
+    arr = []
+    for elem in s:
+        arr.append(elem)
+        
+    count = lenSet(s)    
+    combinations = 2**count
+    powerset = set()
+    powerset.add(())
+    for i in range(combinations):
+        tempSet = set()
+        for j in range(len(arr)):
+            if ((i & 2**j)):
+                tempSet.add(arr[j])
+        powerset.add(tuple(tempSet))
+    print("The powerset of the set ",s,"is:")
+    print(powerset)
+                
 
-def uniqueSetElements(s):
+def uniqueSubSetElements(s):
+    arr = []
+    for elem in s:
+        arr.append(elem)
+    
+    count = lenSet(s)    
+    combinations = 2**count
+    powerset = set()
+    powerset.add(())
+    print("All unique subsets of the set ",s,":")
+    for i in range(combinations):
+        tempSet = set()
+        for j in range(len(arr)):
+            if ((i & 2**j)):
+                tempSet.add(arr[j])
+        print(tempSet)
 
+s1 = {1,2,3}
+s2 = {3,4,5,6}
+s3 = {2,3}
+
+print("Set 1: ",s1)
+print("Set 2: ",s2)
+print("Set 3: ",s3)
+print()
+
+s1 = addSetElement(s1,4)
+print(s1)
+print()
+
+s1 = addSetElement(s1,2)
+print(s1)
+print()
+
+s1 = remSetElement(s1,4)
+print(s1)
+print()
+
+u,i=Union_Intersect(s1,s2)
+print("Union of Set1 and Set2:",u)
+print()
+
+print("Intersection of Set1 and Set2:",i)
+print()
+
+d = diffSet(s1,s2)
+print("Difference Set1 - Set2 =",d)
+print()
+
+subset(s3,s1)
+print()
+
+subset(s2,s1)
+print()
+
+c = lenSet(s2)
+print("No of elements in Set2: ",c)
+print()
+
+sd = symDifSet(s1,s2)
+print("Symmetric Difference of Set1 and Set2: ",sd)
+print()
+
+powerSet(s1)
+print()
+
+uniqueSubSetElements(s3)
+print()
     
